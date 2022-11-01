@@ -1,0 +1,96 @@
+&lt;!DOCTYPE html>  
+&lt;html lang="en"> 
+&lt;head>
+	&lt;meta charset="UTF-8">
+	&lt;meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> 
+	&lt;title>Agenda - Contactos - ProyectoA - Django&lt;/title> 
+ 
+ &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+ 
+ {% load static %} &lt;!-- Cargar URL raíz -->
+ 
+ {% load widget_tweaks %}
+	
+&lt;/head>
+ 
+&lt;body>
+ 
+&lt;!--Menú y barra superior -->
+&lt;div class="container-fluid">
+	&lt;!-- Logo e iniciales -->
+	&lt;nav class="navbar navbar-expand-lg navbar-light bg-light">		
+		&lt;div class="container-fluid">
+			&lt;!--Botón que sustituye al menú en dispositivos móviles -->
+			&lt;button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu_principal" aria-controls="menu_principal" aria-expanded="false" aria-label="Menú">
+			&lt;span class="navbar-toggler-icon">&lt;/span>
+			&lt;/button>
+			
+			&lt;!-- Logotipo y siglas -->
+			&lt;a class="navbar-brand" href="index.php"> 
+				&lt;img alt="Agenda - Proyecto A"
+				src="{% static 'fotos/'%}logotipo.png" class="d-inline-block align-text-top"/>
+				&lt;span>PA&lt;/span>
+			&lt;/a>			
+ 	 		
+			&lt;div class="collapse navbar-collapse" id="menu_principal">
+				&lt;ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    
+					&lt;li class="nav-item dropdown">
+						&lt;a class="nav-link dropdown-toggle" href="#" id="submenu_principal" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							&lt;i class="glyphicon glyphicon-time">&lt;/i>
+							Contactos&lt;/a>						
+						&lt;!-- Iniciamos principio del grupo (menú) -->
+						&lt;ul class="dropdown-menu" aria-labelledby="submenu_principal">						
+								&lt;li>&lt;a class="dropdown-item" href="{% url 'listar' %}">
+									&lt;i class="glyphicon glyphicon-th-list">&lt;/i>
+									Listado&lt;/a>								
+								&lt;/li>
+								&lt;li>&lt;a class="dropdown-item" href="{% url 'nuevo' %}">
+									&lt;i class="glyphicon glyphicon-plus">&lt;/i>
+									Nuevo&lt;/a>								
+								&lt;/li>
+							&lt;/ul> &lt;!-- Cierra la lista de submenús del grupo -->
+					&lt;/li> &lt;!-- Cierra el grupo de submenús del menú principal -->							
+    			&lt;/ul> &lt;!-- Cierra el menú principal con los menús y submenús -->
+			&lt;/div> &lt;!-- container para menús diferentes (principal con grupos y submenus) -->
+	&lt;!-- Menú derecha para usuario y cierre de sesión -->	
+	&lt;div class="collapse navbar-collapse" id="menu_principal">
+		&lt;ul class="navbar-nav me-auto mb-2 mb-lg-0">
+			&lt;li class="nav-item dropdown">
+				&lt;a class="nav-link dropdown-toggle" href="#" id="submenu_principal" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					&lt;i class="fas fa-user"> ProyectoA&lt;/i>
+				&lt;/a>
+				&lt;ul class="dropdown-menu" aria-labelledby="submenu_principal">
+					&lt;li>&lt;a class="nav-link disabled">&lt;i class="fa fa-asterisk">&lt;/i> 
+						administrador						&lt;/a>&lt;/li>
+					&lt;li>&lt;hr class="dropdown-divider">&lt;/li>
+					&lt;li>&lt;a class="nav-link disabled">Configuración&lt;/a>&lt;/li>
+					&lt;li>&lt;a class="nav-link disabled">Perfil&lt;/a>&lt;/li>
+					&lt;li>&lt;hr class="dropdown-divider">&lt;/li>
+					&lt;li>&lt;a class="dropdown-item" href="app_contactos/cerrar">&lt;i class="fa fa-window-close">&lt;/i> Cerrar sesión&lt;/a>&lt;/li>
+				&lt;/ul>
+			&lt;/li>
+		&lt;/ul>			
+	&lt;/div>
+		&lt;/div> &lt;!-- del container fluid de los elementos del menú -->	
+	&lt;/nav>  &lt;!-- del menú principal -->  
+&lt;/div> &lt;!-- del container fluid de la barra superior del menú -->
+ 
+&lt;div>
+ 
+&lt;p>&lt;span class="txt_negrita">Nombre:&lt;/span> &lt;br> {{object.nombre}}&lt;/p>
+&lt;p>&lt;span class="txt_negrita">Tlfno. móvil:&lt;/span> &lt;br> {{object.telefono_movil}}&lt;/p>
+&lt;p>&lt;span class="txt_negrita">Tlfno. fijo:&lt;/span> &lt;br> {{object.telefono_fijo}}&lt;/p>
+&lt;p>&lt;span class="txt_negrita">Dirección:&lt;/span> &lt;br> {{object.direccion}}&lt;/p>
+&lt;p>&lt;span class="txt_negrita">Empresa:&lt;/span> &lt;br> {{object.empresa}}&lt;/p>
+&lt;p>&lt;span class="txt_negrita">Foto:&lt;/span> &lt;br> &lt;img src="{% static 'fotos/'%}{{object.foto}}" alt="{{object.nombre}}" class="img-fluid"> &lt;/p>
+&lt;p>&lt;span class="txt_negrita">Fecha alta:&lt;/span> &lt;br> {{object.fecha_alta}}&lt;/p>
+&lt;p>&lt;span class="txt_negrita">Fecha modificación:&lt;/span> &lt;br> {{object.fecha_actualizacion}}&lt;/p>
+ 
+&lt;!-- Botón para volver a la vista principal (Home) -->
+&lt;a href="../" type="submit" class="btn btn-primary">Volver&lt;/a>
+&lt;/div> 
+&lt;script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">&lt;/script>
+&lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">&lt;/script> 
+&lt;/body>  
+&lt;/html>
